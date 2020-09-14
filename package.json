@@ -1,0 +1,59 @@
+{
+  "name": "json-to-xml-converter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "validate": "npm run test && npm run lint && npm run build",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "lint-staged": "lint-staged",
+    "test": "jest --verbose --passWithNoTests --config './jest.config.json'",
+    "pre-commit-hook": "npm run lint-staged && npm run test",
+    "prettier": "prettier --write \"src/**/*.ts\""
+  },
+  "lint": "tslint -p tsconfig.json",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "10.10.0",
+    "tslint": "5.11.0",
+    "tslint-config-prettier": "1.15.0",
+    "tslint-eslint-rules": "5.4.0",
+    "tslint-microsoft-contrib": "5.2.1",
+    "husky": "1.3.1",
+    "lint-staged": "8.1.5",
+    "prettier": "1.19.1",
+    "typescript": "3.8.3",
+    "jest": "25.1.0",
+    "ts-jest": "25.5.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run pre-commit-hook"
+    }
+  },
+  "prettier": {
+    "useTabs": false,
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "printWidth": 100,
+    "bracketSpacing": true,
+    "arrowParens": "always"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "lint-staged": {
+    "**/*.ts": [
+      "prettier --write",
+      "tslint -p tsconfig.json -c tslint.json",
+      "git add"
+    ]
+  }
+}

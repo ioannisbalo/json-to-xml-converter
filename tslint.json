@@ -1,0 +1,101 @@
+{
+  "rulesDirectory": [
+    "node_modules/tslint-eslint-rules/dist/rules",
+    "node_modules/tslint-microsoft-contrib"
+  ],
+  "rules": {
+    "class-name": true,
+    "curly": true,
+    "forin": true,
+    "label-position": true,
+    "no-arg": true,
+    "no-bitwise": true,
+    "no-console": false,
+    "ordered-imports": false,
+    "no-construct": true,
+    "no-parameter-properties": false,
+    "no-debugger": true,
+    "no-duplicate-variable": true,
+    "no-empty": true,
+    "no-eval": true,
+    "no-string-literal": false,
+    "no-switch-case-fall-through": true,
+    "no-unused-expression": true,
+    "no-var-requires": false,
+    "no-namespace": true,
+    "no-internal-module": true,
+    "no-reference": true,
+    "no-reference-import": true,
+    "only-arrow-functions": true,
+    "triple-equals": true,
+    "semicolon": [true, "always", "strict-bound-class-methods"],
+    "quotemark": [true, "single"],
+    "typedef": [
+      true,
+      "call-signature",
+      "parameter",
+      "property-declaration",
+      "member-variable-declaration"
+    ],
+    "variable-name": [
+      true,
+      "allow-leading-underscore",
+      "ban-keywords",
+      "check-format"
+    ],
+    "member-access": [
+      true,
+      "check-accessor",
+      "check-constructor"
+    ],
+    "no-inferrable-types": false,
+    "no-string-throw": true,
+    "prefer-const": true,
+    "prefer-for-of": true,
+    "no-conditional-assignment": true,
+    "no-duplicate-super": true,
+    "no-invalid-template-strings": true,
+    "no-invalid-this": true,
+    "no-misused-new": true,
+    "no-shadowed-variable": true,
+    "no-unsafe-finally": true,
+    "no-var-keyword": true,
+    "radix": true,
+    "switch-default": true,
+    "max-classes-per-file": [
+      true,
+      2
+    ],
+    "no-require-imports": true,
+    "array-type": [
+      "array"
+    ],
+    "comment-format": [
+      true,
+      "check-space"
+    ],
+    "encoding": true,
+    "newline-before-return": true,
+    "no-unnecessary-initializer": true,
+    "one-variable-per-declaration": true,
+    "prefer-method-signature": true,
+    "no-unnecessary-local-variable": true,
+    "promise-must-complete": true,
+    "no-consecutive-blank-lines": true,
+    "no-trailing-whitespace": true,
+    "whitespace": [true, "check-module"],
+    "import-spacing": true,
+    "trailing-comma": [true, {"multiline": "never", "singleline": "never"}],
+    "eofline": true,
+    "export-name": false
+  },
+  "compilerOptions": {
+    "allowUnusedLabels": false,
+    "noImplicitReturns": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true
+  },
+  "extends": [
+    "tslint-config-prettier"
+  ]
+}
