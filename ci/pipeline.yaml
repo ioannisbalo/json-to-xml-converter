@@ -1,0 +1,112 @@
+resource_types:
+  - name: concourse-bitbucket-pullrequest
+    type: docker-image
+    source:
+      repository: de.icr.io/cbp-development-registry/concourse-bitbucket-pullrequest-resource
+      username: ((container-registry.username))
+      password: ((container-registry.password))
+  - name: bitbucket-build-status
+    type: docker-image
+    source:
+      repository: shyxormz/bitbucket-build-status-resource
+
+resources:
+  - name: repo
+    type: git
+    source:
+      uri: ssh://git@bitbucket.cic-garage.com:8000/ten/json-to-xml-converter.git
+      branch: master
+      private_key: ((bitbucket.private-key))
+  - name: version
+    type: semver
+    source:
+      initial_version: 0.1.0
+      driver: git
+      private_key: ((bitbucket.private-key))
+      git_user: "Concourse <Concourse.CBP@nl.ibm.com>"
+      file: version
+      branch: version
+      uri: ssh://git@bitbucket.cic-garage.com:8000/ten/json-to-xml-converter.git
+  - name: pullrequest
+    type: concourse-bitbucket-pullrequest
+    source:
+      username: ((bitbucket.username))
+      password: ((bitbucket.password))
+      uri: http://bitbucket.cic-garage.com/scm/ten/json-to-xml-converter.git
+      skip_ssl_verification: true
+      only_for_branch: 'master'
+      create_comments: true
+  - name: docker-dind-image
+    type: docker-image
+    source:
+      repository: martijnwouters/dind-with-bx-git-and-python
+      tag: 3.6
+  - name: image
+    type: docker-image
+    source:
+      repository: de.icr.io/cbp-development-registry/json-to-xml-converter
+      username: ((container-registry.username))
+      password: ((container-registry.password))
+
+jobs:
+  - name: build-pullrequest
+    build_logs_to_retain: 50
+    max_in_flight: 1
+    plan:
+      - do:
+        - aggregate:
+          - get: repo
+            resource: pullrequest
+            trigger: true
+            version: every
+          - get: docker-dind-image
+        - put: pullrequest
+          params:
+            path: repo
+            status: pending
+            build_key: json-to-xml-converter-pull-request
+        - task: version
+          image: docker-dind-image
+          file: repo/ci/tasks/pullrequest-version.yaml
+        - put: image
+          params:
+            build: ./repo
+            tag_file: version/version
+            cache: true
+            cache_tag: latest
+          get_params:
+            skip_download: true
+        - put: pullrequest
+          params:
+            path: repo
+            status: success
+            build_key: json-to-xml-converter-pull-request
+        on_failure:
+          put: pullrequest
+          params:
+            path: repo
+            status: failure
+            build_key: json-to-xml-converter-pull-request
+
+  - name: build
+    max_in_flight: 1
+    plan:
+      - get: repo
+        trigger: true
+      - get: version
+        params:
+          bump: minor
+      - put: image
+        params:
+          build: ./repo
+          tag_file: version/version
+          tag_as_latest: true
+        get_params:
+          skip_download: true
+      - put: version
+        params:
+          file: version/version
+      - put: repo
+        params:
+          repository: repo
+          tag: version/version
