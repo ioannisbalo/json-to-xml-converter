@@ -18,8 +18,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "inversify": "5.0.1",
-    "reflect-metadata": "0.1.13",
     "xmlbuilder": "11.0.1"
   },
   "devDependencies": {

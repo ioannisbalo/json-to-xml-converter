@@ -2,10 +2,8 @@ import { InvalidAttributeError } from '../errors/InvalidAttributeError';
 import { KeyValueInterface } from '../interfaces/KeyValueInterface';
 import { MapAttributesInterface } from '../interfaces/MapAttributesInterface';
 import { XmlBuilderInterface } from '../interfaces/XmlBuilderInterface';
-import { injectable } from 'inversify';
 import { begin, XMLElementOrXMLNode } from 'xmlbuilder';
 
-@injectable()
 export class XmlBuilder implements XmlBuilderInterface {
   public beginXmlDocument(
     name: string,

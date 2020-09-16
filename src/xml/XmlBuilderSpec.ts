@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import { XmlBuilder } from './XmlBuilder';
 import { XMLElementOrXMLNode } from 'xmlbuilder';
 import { InvalidAttributeError } from '../errors/InvalidAttributeError';

@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import { RecursiveConverter } from './RecursiveConverter';
 import { TypeNotSupportedError } from '../errors/TypeNotSupportedError';
 import { KeyValueInterface } from '../interfaces/KeyValueInterface';
