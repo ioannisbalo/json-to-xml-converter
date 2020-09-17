@@ -40,13 +40,15 @@ export class XmlBuilder implements XmlBuilderInterface {
   ): KeyValueInterface<string> {
     const updatedAttributes: MapAttributesInterface[] = attributes.map(
       (attribute: MapAttributesInterface) => {
-        if (!attribute.value && (!attribute.source || !jsonInput[attribute.source])) {
+        const attributeValue = attribute.value ? attribute.value : jsonInput[attribute.source];
+
+        if (!attributeValue) {
           throw new InvalidAttributeError(attribute.name);
         }
 
         return {
           ...attribute,
-          value: attribute.value ? attribute.value : jsonInput[attribute.source]
+          value: attributeValue
         };
       }
     );
