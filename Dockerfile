@@ -13,7 +13,7 @@ COPY package.json package.json
 COPY package-lock.json package-lock.json
 
 RUN npm config set unsafe-perm true
-RUN npm ci --loglevel error
+RUN npm ci --loglevel error --ignore-scripts
 
 COPY . .
 

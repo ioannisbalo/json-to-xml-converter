@@ -10,16 +10,19 @@
     "validate": "npm run test && npm run lint && npm run build",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "lint-staged": "lint-staged",
-    "test": "jest --verbose --passWithNoTests --config './jest.config.json'",
+    "test": "jest --verbose --config './jest.config.json'",
     "pre-commit-hook": "npm run lint-staged && npm run test",
     "prettier": "prettier --write \"src/**/*.ts\""
   },
   "lint": "tslint -p tsconfig.json",
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "xmlbuilder": "11.0.1"
+  },
   "devDependencies": {
     "@types/node": "10.10.0",
+    "@types/jest": "24.0.11",
     "tslint": "5.11.0",
     "tslint-config-prettier": "1.15.0",
     "tslint-eslint-rules": "5.4.0",
