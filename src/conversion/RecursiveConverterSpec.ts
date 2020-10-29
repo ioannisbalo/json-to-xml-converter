@@ -4,7 +4,6 @@ import { KeyValueInterface } from '../interfaces/KeyValueInterface';
 import { MapElementTypeEnum } from '../enums/MapElementEnum';
 import { XmlBuilder } from '../xml/XmlBuilder';
 import { JsonToXmlMapNotCompleteError } from '../errors/JsonToXmlMapNotCompleteError';
-import { NodeTypeEnum } from '../enums/NodeTypeEnum';
 
 class MockXmlElement {}
 const mockXmlElement = new MockXmlElement();

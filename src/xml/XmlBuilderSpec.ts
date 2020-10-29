@@ -1,8 +1,8 @@
 import { XmlBuilder } from './XmlBuilder';
 import { XMLElementOrXMLNode } from 'xmlbuilder';
 import { InvalidAttributeError } from '../errors/InvalidAttributeError';
-import { NodeTypeEnum } from '../../../cbp/nl-afrr-activated-energy-forwarding/server/src/core/activated-energy/enums/NodeTypeEnum';
-import { NodeTypeNotSupportedError } from '../../../cbp/nl-afrr-activated-energy-forwarding/server/src/dataproviders/services/xml/NodeTypeNotSupportedError';
+import { NodeTypeEnum } from '../enums/NodeTypeEnum';
+import { NodeTypeNotSupportedError } from '../errors/NodeTypeNotSupportedError';
 
 describe('An XmlBuilder', () => {
   const xmlBuilderService: XmlBuilder = new XmlBuilder();
