@@ -59,7 +59,13 @@ export class RecursiveConverter {
 
       switch (mapItem.type) {
         case MapElementTypeEnum.String:
-          this.xmlBuilder.addNode(xmlRoot, mapItem.xmlNodeName, updatedAttributes, jsonItem);
+          this.xmlBuilder.addNode(
+            xmlRoot,
+            mapItem.xmlNodeName,
+            updatedAttributes,
+            jsonItem,
+            mapItem.nodeType
+          );
 
           break;
         case MapElementTypeEnum.IsoDate:
@@ -67,7 +73,8 @@ export class RecursiveConverter {
             xmlRoot,
             mapItem.xmlNodeName,
             updatedAttributes,
-            new IsoDate(mapItem.xmlNodeName, jsonItem).value
+            new IsoDate(mapItem.xmlNodeName, jsonItem).value,
+            mapItem.nodeType
           );
 
           break;
@@ -76,12 +83,18 @@ export class RecursiveConverter {
             xmlRoot,
             mapItem.xmlNodeName,
             updatedAttributes,
-            new EntsoeBoolean(jsonItem).value
+            new EntsoeBoolean(jsonItem).value,
+            mapItem.nodeType
           );
 
           break;
         case MapElementTypeEnum.Object:
-          const node = this.xmlBuilder.addNode(xmlRoot, mapItem.xmlNodeName, updatedAttributes);
+          const node = this.xmlBuilder.addNode(
+            xmlRoot,
+            mapItem.xmlNodeName,
+            updatedAttributes,
+            mapItem.nodeType
+          );
           this.convertRecursively(node, jsonItem, mapItem.body);
 
           break;

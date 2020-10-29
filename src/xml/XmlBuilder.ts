@@ -3,6 +3,8 @@ import { KeyValueInterface } from '../interfaces/KeyValueInterface';
 import { MapAttributesInterface } from '../interfaces/MapAttributesInterface';
 import { XmlBuilderInterface } from '../interfaces/XmlBuilderInterface';
 import { begin, XMLElementOrXMLNode } from 'xmlbuilder';
+import { NodeTypeEnum } from '../enums/NodeTypeEnum';
+import { NodeTypeNotSupportedError } from '../errors/NodeTypeNotSupportedError';
 
 export class XmlBuilder implements XmlBuilderInterface {
   public beginXmlDocument(
@@ -20,9 +22,18 @@ export class XmlBuilder implements XmlBuilderInterface {
     xmlElement: XMLElementOrXMLNode,
     name: string,
     attributes?: KeyValueInterface<string>,
-    text?: string | number
+    text?: string | number,
+    nodeType: NodeTypeEnum = NodeTypeEnum.Normal
   ): XMLElementOrXMLNode {
-    return xmlElement.element(`${name}`, attributes, text);
+    if (nodeType === NodeTypeEnum.Normal) {
+      return xmlElement.element(`${name}`, attributes, text);
+    } else if (nodeType === NodeTypeEnum.ValueInAttributes) {
+      attributes.v = text.toString();
+
+      return xmlElement.element(`${name}`, attributes);
+    }
+
+    throw new NodeTypeNotSupportedError(nodeType, name);
   }
 
   public addNodesArray(
