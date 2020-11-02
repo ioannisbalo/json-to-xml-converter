@@ -7,7 +7,6 @@ import { JsonToXmlMapNotCompleteError } from '../errors/JsonToXmlMapNotCompleteE
 
 class MockXmlElement {}
 const mockXmlElement = new MockXmlElement();
-
 const mockBeginXmlDocument = jest.fn().mockImplementation((): MockXmlElement => mockXmlElement);
 const mockAddNode = jest.fn().mockImplementation((): MockXmlElement => mockXmlElement);
 const mockAddNodesArray = jest
@@ -40,6 +39,7 @@ describe('A RecursiveConverter', () => {
   const entsoeBooleanXmlNodeName = 'entsoeBooleanNode';
   const objectXmlNodeName = 'objectNode';
   const arrayXmlNodeName = 'arrayNode';
+  const nodeType = 'Normal';
 
   const stringTypeProperty = {
     xmlNodeName: stringXmlNodeName,
@@ -130,7 +130,8 @@ describe('A RecursiveConverter', () => {
       mockXmlElement,
       stringXmlNodeName,
       {},
-      jsonInput.stringTypeProperty
+      jsonInput.stringTypeProperty,
+      undefined
     );
   });
 
@@ -149,7 +150,8 @@ describe('A RecursiveConverter', () => {
       mockXmlElement,
       isoDateXmlNodeName,
       {},
-      jsonInput.isoDateProperty
+      jsonInput.isoDateProperty,
+      undefined
     );
   });
 
@@ -168,7 +170,8 @@ describe('A RecursiveConverter', () => {
       mockXmlElement,
       entsoeBooleanXmlNodeName,
       {},
-      jsonInput.entsoeBooleanProperty
+      jsonInput.entsoeBooleanProperty,
+      undefined
     );
   });
 
@@ -193,19 +196,22 @@ describe('A RecursiveConverter', () => {
     expect(mockXmlBuilderServiceInstance.addNode).toHaveBeenCalledWith(
       mockXmlElement,
       objectXmlNodeName,
-      {}
+      {},
+      undefined
     );
     expect(mockXmlBuilderServiceInstance.addNode).toHaveBeenCalledWith(
       mockXmlElement,
       stringXmlNodeName,
       {},
-      jsonInput.objectProperty.stringTypeProperty1
+      jsonInput.objectProperty.stringTypeProperty1,
+      undefined
     );
     expect(mockXmlBuilderServiceInstance.addNode).toHaveBeenCalledWith(
       mockXmlElement,
       stringXmlNodeName,
       {},
-      jsonInput.objectProperty.stringTypeProperty2
+      jsonInput.objectProperty.stringTypeProperty2,
+      undefined
     );
   });
 
@@ -232,13 +238,15 @@ describe('A RecursiveConverter', () => {
       mockXmlElement,
       stringXmlNodeName,
       {},
-      jsonInput.arrayProperty[0].stringTypeProperty
+      jsonInput.arrayProperty[0].stringTypeProperty,
+      undefined
     );
     expect(mockXmlBuilderServiceInstance.addNode).toHaveBeenCalledWith(
       mockXmlElement,
       stringXmlNodeName,
       {},
-      jsonInput.arrayProperty[1].stringTypeProperty
+      jsonInput.arrayProperty[1].stringTypeProperty,
+      undefined
     );
   });
 
@@ -263,7 +271,8 @@ describe('A RecursiveConverter', () => {
       mockXmlElement,
       stringXmlNodeName,
       {},
-      jsonInputWithOneProperty.stringTypeProperty1
+      jsonInputWithOneProperty.stringTypeProperty1,
+      undefined
     );
   });
 
@@ -287,7 +296,8 @@ describe('A RecursiveConverter', () => {
       mockXmlElement,
       stringXmlNodeName,
       {},
-      jsonInput.stringTypeProperty2
+      jsonInput.stringTypeProperty2,
+      undefined
     );
   });
 

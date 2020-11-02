@@ -1,6 +1,8 @@
 import { XmlBuilder } from './XmlBuilder';
 import { XMLElementOrXMLNode } from 'xmlbuilder';
 import { InvalidAttributeError } from '../errors/InvalidAttributeError';
+import { NodeTypeEnum } from '../enums/NodeTypeEnum';
+import { NodeTypeNotSupportedError } from '../errors/NodeTypeNotSupportedError';
 
 describe('An XmlBuilder', () => {
   const xmlBuilderService: XmlBuilder = new XmlBuilder();
@@ -76,6 +78,20 @@ describe('An XmlBuilder', () => {
             `<${name2}>${content2}</${name2}>` +
             `</${rootName}>`
         );
+      });
+
+      it('should be successful when the node type is ValueInAttributes', () => {
+        xmlBuilderService.addNode(xmlRoot, name1, {}, content1, NodeTypeEnum.ValueInAttributes);
+
+        expect(xmlBuilderService.endXmlDocument(xmlRoot, false)).toBe(
+          `<${rootName}>` + `<${name1} v="${content1}"/>` + `</${rootName}>`
+        );
+      });
+
+      it('should throw an error when using an unknown node type', () => {
+        expect(() =>
+          xmlBuilderService.addNode(xmlRoot, name1, {}, content1, '' as NodeTypeEnum)
+        ).toThrowError(new NodeTypeNotSupportedError('' as NodeTypeEnum, name1));
       });
     });
 

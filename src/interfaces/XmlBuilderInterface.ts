@@ -1,5 +1,6 @@
 import { KeyValueInterface } from './KeyValueInterface';
 import { MapAttributesInterface } from './MapAttributesInterface';
+import { NodeTypeEnum } from '../enums/NodeTypeEnum';
 
 export interface XmlBuilderInterface {
   beginXmlDocument(name: string, attributes: KeyValueInterface<string>): any;
@@ -8,7 +9,8 @@ export interface XmlBuilderInterface {
     xmlElement: any,
     name: string,
     attributes?: KeyValueInterface<string>,
-    text?: string | number
+    text?: string | number,
+    nodeType?: NodeTypeEnum
   ): any;
   addNodesArray(xmlElement: any, array: KeyValueInterface<any>[]): any[];
   updateAttributes(
