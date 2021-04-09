@@ -6,20 +6,9 @@ This readme has been last updated for version 0.1.0.
 
 ## Description
 
-The purpose of this package is to convert javascript objects to XML strings (complying to Entsoe formatting standards).
+The purpose of this package is to convert javascript objects to XML strings.
 
 ## Installing and using the package
-
-**NOTE**: To be able to install the package, the build step needs access to the IBM CIC bitbucket server.
-
-- Add `git+<the bitbucket http url>`  to the package.json.
-- Select the version to install by adding `#<the required tag>` at the end of the url.
- 
-For example:
-
-`"json-to-xml-converter": "git+http://bitbucket.cic-garage.com/scm/ten/json-to-xml-converter.git#0.1.0"`
-
-- Run `npm install`.
 
 To use the package, you can simply:
 ```
@@ -77,10 +66,9 @@ To convert the example would result in the XML string: `<KEY1>1</KEY1><key2>2</k
 
 * **type**: This option dictates the way that a value should be handled by the converter. Available types are:
 1. string
-2. entsoeBoolean
-3. isoDate
-4. object
-5. array
+2. isoDate
+3. object
+4. array
 
 For the example, both the types need to be `string`.
 

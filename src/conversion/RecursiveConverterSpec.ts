@@ -36,7 +36,6 @@ describe('A RecursiveConverter', () => {
   const rootXmlNodeName = 'rootNode';
   const stringXmlNodeName = 'stringNode';
   const isoDateXmlNodeName = 'isoDateNode';
-  const entsoeBooleanXmlNodeName = 'entsoeBooleanNode';
   const objectXmlNodeName = 'objectNode';
   const arrayXmlNodeName = 'arrayNode';
   const nodeType = 'Normal';
@@ -52,13 +51,6 @@ describe('A RecursiveConverter', () => {
     xmlNodeName: isoDateXmlNodeName,
     attributes: [],
     type: MapElementTypeEnum.IsoDate,
-    body: {}
-  };
-
-  const entsoeBooleanProperty = {
-    xmlNodeName: entsoeBooleanXmlNodeName,
-    attributes: [],
-    type: MapElementTypeEnum.EntsoeBoolean,
     body: {}
   };
 
@@ -151,26 +143,6 @@ describe('A RecursiveConverter', () => {
       isoDateXmlNodeName,
       {},
       jsonInput.isoDateProperty,
-      undefined
-    );
-  });
-
-  it('should correctly call the addNode method on the entsoeBoolean case', () => {
-    const jsonToXmlMapBody = { entsoeBooleanProperty: entsoeBooleanProperty };
-    recursiveConverter = new RecursiveConverter(
-      mockXmlBuilderServiceInstance,
-      createMockMap(jsonToXmlMapBody)
-    );
-    const jsonInput = { entsoeBooleanProperty: 'A01' };
-
-    recursiveConverter.convert(jsonInput);
-
-    expect(mockXmlBuilderServiceInstance.updateAttributes).toHaveBeenCalledTimes(2);
-    expect(mockXmlBuilderServiceInstance.addNode).toHaveBeenCalledWith(
-      mockXmlElement,
-      entsoeBooleanXmlNodeName,
-      {},
-      jsonInput.entsoeBooleanProperty,
       undefined
     );
   });

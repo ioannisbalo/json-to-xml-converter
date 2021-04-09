@@ -3,7 +3,6 @@ import { MapProviderInterface } from '../interfaces/MapProviderInterface';
 import { KeyValueInterface } from '../interfaces/KeyValueInterface';
 import { JsonToXmlMapInterface } from '../interfaces/JsonToXmlMapInterface';
 import { JsonToXmlMapNotCompleteError } from '../errors/JsonToXmlMapNotCompleteError';
-import { EntsoeBoolean } from '../entities/EntsoeBoolean';
 import { IsoDate } from '../entities/IsoDate';
 import { MapElementTypeEnum } from '../enums/MapElementEnum';
 import { TypeNotSupportedError } from '../errors/TypeNotSupportedError';
@@ -74,16 +73,6 @@ export class RecursiveConverter {
             mapItem.xmlNodeName,
             updatedAttributes,
             new IsoDate(mapItem.xmlNodeName, jsonItem).value,
-            mapItem.nodeType
-          );
-
-          break;
-        case MapElementTypeEnum.EntsoeBoolean:
-          this.xmlBuilder.addNode(
-            xmlRoot,
-            mapItem.xmlNodeName,
-            updatedAttributes,
-            new EntsoeBoolean(jsonItem).value,
             mapItem.nodeType
           );
 
